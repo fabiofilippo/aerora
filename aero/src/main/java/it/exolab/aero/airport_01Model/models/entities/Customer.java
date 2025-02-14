@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.exolab.aero.utils.customUtils.constants.db.DbConstants;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
@@ -64,6 +65,7 @@ public class Customer implements Serializable {
 
 	@OneToMany(mappedBy = DbConstants.CustomerTable.TABLE_NAME)
 	@JsonbTransient
+	@JsonIgnore
 	@OrderBy("date DESC, id DESC")
 	private List<Reservation> reservationList;
 

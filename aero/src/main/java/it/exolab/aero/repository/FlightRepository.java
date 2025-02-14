@@ -1,11 +1,12 @@
 package it.exolab.aero.repository;
 
 import it.exolab.aero.airport_01Model.models.entities.Flight;
-import it.exolab.aero.airport_01Model.models.entities.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,18 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     List<Flight> findAll();
 
     Optional<Flight> findById(Long id);
+
+    @Query("SELECT f " +
+            "FROM Flight f " +
+            "WHERE " +
+                "f.departureDate >= :departureDate " +
+                "AND f.departureDate < :maxDate " +
+                "AND f.flightRoute.id = :flightRouteId")
+    List<Flight> findFlightByDepartureDate(
+            @Param("flightRouteId") Long flightRouteId,
+            @Param("departureDate" )LocalDateTime departureDate,
+            @Param("maxDate") LocalDateTime maxDate
+            );
 
 //	@SuppressWarnings("unchecked")
 //	public List<Flight> findAllFlight(EntityManager entityManager) throws DBQueryException, UnforeseenException {

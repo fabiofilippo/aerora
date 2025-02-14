@@ -26,7 +26,7 @@ public class DbConstants {
 		public final static Float MAX_TANK_CAPACITY = 50000F;
 
 		public final static String TABLE_NAME 			= "airplane";
-		public final static String COLUMN_FK 			= "id_airplane";
+		public final static String COLUMN_FK 			= "airplane_id";
 		public final static String COLUMN_MODEL 		= "model";
 		public final static String COLUMN_SEATS 		= "seats";
 		public final static String COLUMN_HOLD_CAPACITY = "hold_capacity";
@@ -161,7 +161,7 @@ public class DbConstants {
 	}
 	public static class FlightRouteTable {
 		public final static String TABLE_NAME 		= "flightroute";
-		public final static String COLUMN_FK 		= "id_flightroute";
+		public final static String COLUMN_FK 		= "flight_route_id";
 		public final static String COLUMN_DISTANCE 	= "distanceKm";
 		public final static String COLUMN_DEPARTURE = "id_departure_airport";
 		public final static String COLUMN_ARRIVAL 	= "id_arrival_airport";

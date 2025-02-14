@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class FlightRouteService {
-	 @Autowired
+	@Autowired
 	FlightRouteRepository flightRouteRepository;
 
 	public List<FlightRoute> findAll() {

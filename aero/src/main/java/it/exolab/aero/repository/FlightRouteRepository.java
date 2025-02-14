@@ -3,7 +3,9 @@ package it.exolab.aero.repository;
 import it.exolab.aero.airport_01Model.models.entities.Airplane;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +17,14 @@ public interface FlightRouteRepository extends JpaRepository<FlightRoute, Long> 
     List<FlightRoute> findAll();
 
     Optional<FlightRoute> findById(Long id);
+
+    @Query("SELECT fr FROM FlightRoute fr " +
+            "JOIN fr.departureAirport da " +
+            "JOIN fr.arrivalAirport aa " +
+            "WHERE da.city = :departureCity " +
+            "AND aa.city = :arrivalCity")
+    Optional<FlightRoute> findByAirports(@Param("departureCity") String departureCity,
+                                         @Param("arrivalCity") String arrivalCity);
 
 //	@SuppressWarnings("unchecked")
 //	public List<FlightRoute> findAllFlightRoute(EntityManager entityManager) throws DBQueryException, UnforeseenException {

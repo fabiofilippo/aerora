@@ -1,5 +1,6 @@
 package it.exolab.aero.airport_01Model.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.exolab.aero.utils.customUtils.constants.db.DbConstants;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
@@ -30,6 +31,7 @@ public class Ticket implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name = DbConstants.ReservationTable.COLUMN_FK,  insertable = true, updatable = true)
 	@JsonbTransient
+	@JsonIgnore
 	private Reservation reservation;
 
 	@Column(name = DbConstants.COLUMN_VALIDITY)

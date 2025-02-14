@@ -1,10 +1,14 @@
 package it.exolab.aero.rest.endpoint;
 
+import it.exolab.aero.airport_01Model.dto.FlightSearchDto;
+import it.exolab.aero.airport_01Model.dto.ResponseDto;
 import it.exolab.aero.airport_01Model.models.entities.Flight;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
+import it.exolab.aero.service.controllers.CommonControllerService;
 import it.exolab.aero.service.controllers.FlightRouteService;
 import it.exolab.aero.service.controllers.FlightService;
 import it.exolab.aero.utils.customUtils.constants.strings.RestConstants;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,10 @@ public class FlightRest {
 
     @Autowired
     FlightService flightService;
+
+    @Autowired
+    CommonControllerService commonControllerService;
+
 
     @GetMapping("/findAll")
     public ResponseEntity<List> findAll() {
@@ -40,6 +48,24 @@ public class FlightRest {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new Flight(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/flightSearch")
+    public ResponseEntity<ResponseDto> flightSearch(@RequestBody FlightSearchDto flightSearchDto) throws AeroportoException {
+        ResponseDto responseDto = new ResponseDto();
+        try {
+            List<Flight> availableFlightList = commonControllerService.findFlight(flightSearchDto);
+            responseDto.setData(availableFlightList);
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (AeroportoException e) {
+            e.printStackTrace();
+            responseDto.setErrorMessage(e.getMessage());
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseDto.setErrorMessage(e.getMessage());
+            return new ResponseEntity<>(responseDto, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

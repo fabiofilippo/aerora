@@ -1,12 +1,57 @@
 package it.exolab.aero.service.controllers;
 
 
+import it.exolab.aero.airport_01Model.dto.FlightDto;
+import it.exolab.aero.airport_01Model.dto.FlightSearchDto;
+import it.exolab.aero.airport_01Model.models.entities.Airport;
+import it.exolab.aero.airport_01Model.models.entities.Flight;
+import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
+import it.exolab.aero.airport_01Model.models.entities.Reservation;
+import it.exolab.aero.repository.FlightRepository;
+import it.exolab.aero.repository.FlightRouteRepository;
+import it.exolab.aero.utils.customUtils.constants.exception.airport_01.Airport01ExceptionConstants;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
+import it.exolab.aero.utils.customUtils.exceptions.FlightRouteException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class CommonControllerService {
 
+	@Autowired
+	FlightRouteRepository flightRouteRepository;
+
+	@Autowired
+	FlightRepository flightRepository;
+
 	private static final String CLASSNAME = "CommonEjb";
+
+	public List<Flight> findFlight(FlightSearchDto flightSearchDto) {
+
+		FlightRoute foundFlightRoute = flightRouteRepository.findByAirports(flightSearchDto.getCityDepartureAirport(), flightSearchDto.getCityArrivalAirport()).orElseThrow(() -> new FlightRouteException(
+				Airport01ExceptionConstants.NO_FLIGHTROUTES));
+
+		LocalDateTime departureDate = LocalDateTime.parse(flightSearchDto.getDepatureDate());
+		LocalDateTime maxDate = departureDate.withHour(23).withMinute(59).withSecond(59);
+		List<Flight> foundFlightList = flightRepository.findFlightByDepartureDate(foundFlightRoute.getId(), departureDate, maxDate);
+
+		return foundFlightList.stream()
+				.filter(flight ->
+						flight.getReservationList() == null ||
+								flight.getReservationList().stream()
+										.mapToInt(reservation ->
+												reservation.getTicketList() == null ? 0 : reservation.getTicketList().size())
+										.sum() < flight.getAirplane().getSeats()
+					   )
+				.collect(Collectors.toList());
+	}
 //
 //	@Override
 //	public FlightDto updateFlight(FlightDto flightDto) throws ValidatorException, DBQueryException, UnforeseenException {

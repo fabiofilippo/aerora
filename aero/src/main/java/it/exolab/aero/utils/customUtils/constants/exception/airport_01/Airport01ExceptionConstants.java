@@ -34,4 +34,7 @@ public class Airport01ExceptionConstants {
 	public final static String METHOD_VALIDATE_ID_FLIGHT 	= "Method validateFlightAndId";
 	public final static String METHOD_INSERT_RESERVATION 	= "Method insertReservation";
 	public final static String METHOD_VALIDATE_TICKET 		= "Method validateTicket";
+
+	public final static String NO_FLIGHTROUTES = "Non ci sono voli per la tratta selezionata";
+	public final static String NO_FLIGHTS = "Non ci sono voli disponibili";
 }

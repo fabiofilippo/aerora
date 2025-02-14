@@ -1,5 +1,6 @@
 package it.exolab.aero.airport_01Model.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.exolab.aero.utils.customUtils.constants.db.DbConstants;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class Airplane implements Serializable {
 
 	@OneToMany(mappedBy = DbConstants.AirplaneTable.TABLE_NAME, fetch = FetchType.LAZY)
 	@JsonbTransient
+	@JsonIgnore
 	private List<Flight> flightList;
 
 
