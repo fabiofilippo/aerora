@@ -26,6 +26,11 @@ public interface FlightRouteRepository extends JpaRepository<FlightRoute, Long> 
     Optional<FlightRoute> findByAirports(@Param("departureCity") String departureCity,
                                          @Param("arrivalCity") String arrivalCity);
 
+    @Query("SELECT fr FROM FlightRoute fr " +
+            "JOIN fr.departureAirport a " +
+            "WHERE a.city = :departureCity ")
+    List<FlightRoute> findByDepartureCity(@Param("departureCity") String departureCity);
+
 //	@SuppressWarnings("unchecked")
 //	public List<FlightRoute> findAllFlightRoute(EntityManager entityManager) throws DBQueryException, UnforeseenException {
 //		try {

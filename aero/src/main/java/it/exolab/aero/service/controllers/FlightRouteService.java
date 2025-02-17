@@ -1,5 +1,6 @@
 package it.exolab.aero.service.controllers;
 
+import it.exolab.aero.airport_01Model.dto.FlightRouteDto;
 import it.exolab.aero.airport_01Model.models.entities.Airport;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
 import it.exolab.aero.repository.FlightRouteRepository;
@@ -22,6 +23,15 @@ public class FlightRouteService {
 		Optional<FlightRoute> flightRoute = flightRouteRepository.findById(id);
 
 		return flightRoute.get();
+	}
+
+	public List<FlightRoute> findByDepartureCity(FlightRouteDto flightRouteDto) {
+		try {
+			List<FlightRoute> flightRouteList = flightRouteRepository.findByDepartureCity(flightRouteDto.getDepartureAirportCity());
+			return flightRouteList;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 //	@Override

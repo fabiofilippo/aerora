@@ -1,8 +1,7 @@
 package it.exolab.aero.rest.endpoint;
 
-import it.exolab.aero.airport_01Model.models.entities.Airport;
+import it.exolab.aero.airport_01Model.dto.FlightRouteDto;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
-import it.exolab.aero.service.controllers.AirportService;
 import it.exolab.aero.service.controllers.FlightRouteService;
 import it.exolab.aero.utils.customUtils.constants.strings.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,17 @@ public class FlightRouteRest{
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new FlightRoute(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/findByDepartureCity")
+    public ResponseEntity<List<FlightRoute>> findByDepartureCity(@RequestBody FlightRouteDto flightRouteInput) {
+        try {
+            List<FlightRoute> flightRouteList = flightRouteService.findByDepartureCity(flightRouteInput);
+            return new ResponseEntity<>(flightRouteList, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
