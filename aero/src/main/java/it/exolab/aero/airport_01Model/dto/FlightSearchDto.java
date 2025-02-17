@@ -11,5 +11,5 @@ public class FlightSearchDto implements Serializable {
     private String cityDepartureAirport;
     private String cityArrivalAirport;
     private Integer passengersNumber;
-    private String depatureDate;
+    private String departureDate;
 }

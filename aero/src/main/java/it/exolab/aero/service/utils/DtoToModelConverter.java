@@ -18,8 +18,8 @@ public class DtoToModelConverter {
 	public Customer customerFactoryForUpdate(CustomerDto customerDto) {
 		Customer customerEntity = new Customer();
 		customerEntity.setId(customerDto.getId());
-		customerEntity.setName(customerDto.getName());
-		customerEntity.setSurname(customerDto.getSurname());
+		customerEntity.setCustomerName(customerDto.getName());
+		customerEntity.setCustomerSurname(customerDto.getSurname());
 		customerEntity.setPhoneNumber(customerDto.getPhoneNumber());
 		customerEntity.setResidentialAddress(customerDto.getResidentialAddress());
 		customerEntity.setResidenceCity(customerDto.getResidenceCity());
@@ -84,7 +84,7 @@ public class DtoToModelConverter {
 		Airport airportEntity = new Airport();
 		airportEntity.setCity(airportDto.getAirportCity());
 		airportEntity.setId(airportDto.getId());
-		airportEntity.setName(airportDto.getAirportName());
+		airportEntity.setAirportName(airportDto.getAirportName());
 		return airportEntity;
 	}
 

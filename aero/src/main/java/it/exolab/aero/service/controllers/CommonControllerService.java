@@ -38,19 +38,27 @@ public class CommonControllerService {
 		FlightRoute foundFlightRoute = flightRouteRepository.findByAirports(flightSearchDto.getCityDepartureAirport(), flightSearchDto.getCityArrivalAirport()).orElseThrow(() -> new FlightRouteException(
 				Airport01ExceptionConstants.NO_FLIGHTROUTES));
 
-		LocalDateTime departureDate = LocalDateTime.parse(flightSearchDto.getDepatureDate());
+		LocalDateTime departureDate = LocalDateTime.parse(flightSearchDto.getDepartureDate());
 		LocalDateTime maxDate = departureDate.withHour(23).withMinute(59).withSecond(59);
 		List<Flight> foundFlightList = flightRepository.findFlightByDepartureDate(foundFlightRoute.getId(), departureDate, maxDate);
 
-		return foundFlightList.stream()
-				.filter(flight ->
-						flight.getReservationList() == null ||
-								flight.getReservationList().stream()
-										.mapToInt(reservation ->
-												reservation.getTicketList() == null ? 0 : reservation.getTicketList().size())
-										.sum() < flight.getAirplane().getSeats()
-					   )
-				.collect(Collectors.toList());
+		List<Flight> filteredList = new ArrayList<>();
+
+		for (Flight flight : foundFlightList) {
+			int remainingSeats = flight.getAirplane().getSeats();
+			if (Objects.nonNull(flight.getReservationList())) {
+				for (Reservation reservation : flight.getReservationList()) {
+					if (Objects.nonNull(reservation.getTicketList())) {
+						remainingSeats -= reservation.getTicketList().size();
+					}
+				}
+			}
+			if (remainingSeats > 0) {
+				filteredList.add(flight);
+			}
+		}
+
+		return filteredList;
 	}
 //
 //	@Override

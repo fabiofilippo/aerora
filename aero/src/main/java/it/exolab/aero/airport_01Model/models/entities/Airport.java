@@ -20,8 +20,8 @@ public class Airport implements Serializable {
 	@Column(name = DbConstants.COLUMN_PK)
 	private Long id;
 
-	@Column(name = DbConstants.NAME)
-	private String name;
+	@Column(name = DbConstants.AirportTable.AIRPORT_NAME)
+	private String airportName;
 
 	@Column(name = DbConstants.AirportTable.COLUMN_CITY)
 	private String city;
@@ -50,12 +50,12 @@ public class Airport implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getAirportName() {
+		return airportName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAirportName(String name) {
+		this.airportName = name;
 	}
 
 	public String getCity() {
@@ -84,7 +84,7 @@ public class Airport implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Airport [id=" + id + ", name=" + name + ", city=" + city + ", departureAirportSize=" + (departureAirport == null ? 0 : departureAirport.size())
+		return "Airport [id=" + id + ", name=" + airportName + ", city=" + city + ", departureAirportSize=" + (departureAirport == null ? 0 : departureAirport.size())
 				+ ", arrivalAirport=" + (arrivalAirport == null ? 0 : arrivalAirport.size()) + "]";
 	}
 

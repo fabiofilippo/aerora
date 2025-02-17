@@ -43,6 +43,7 @@ public class DbConstants {
 		public final static int NAME_LENGTH 		= 30;
 		public final static int CITY_LENGTH 		= 30;
 		public final static String TABLE_NAME 		= "airport";
+		public final static String AIRPORT_NAME 	= "airport_name";
 		public final static String COLUMN_CITY 		= "city";
 		public final static String MAP_DEPARTURE 	= "departureAirport";
 		public final static String MAP_ARRIVAL 		= "arrivalAirport";
@@ -58,7 +59,7 @@ public class DbConstants {
 		public final static String TABLE_NAME 				= "reservation";
 		public final static String COLUMN_FK 				= "id_reservation";
 		public final static String COLUMN_DATE 				= "date";
-		public final static String COLUMN_PAYMENT_METHOD 	= "paymentMethod";
+		public final static String COLUMN_PAYMENT_METHOD 	= "payment_method";
 
 		public final static boolean DATE_IS_REQUIRED_ON_DB		= true;
 		public final static boolean CUSTOMER_IS_REQUIRED_ON_DB	= false;
@@ -92,7 +93,8 @@ public class DbConstants {
 		public final static int IDENTITY_CARD_NUMBER_LENGTH = 20;
 
 		public final static String EMAIL 				= "email";
-		public final static String SURNAME 				= "surname";
+		public final static String CUSTOMER_NAME 		= "customer_name";
+		public final static String CUSTOMER_SURNAME 	= "customer_surname";
 		public final static String PASSWORD 			= "password";
 		public final static String PHONE_NUMBER 		= "phoneNumber";
 		public final static String BIRTH_CITY 			= "birthCity";
@@ -106,16 +108,16 @@ public class DbConstants {
 		public final static String ROLE 				= "role";
 
 		public final static String TABLE_NAME 					= "customer";
-		public final static String COLUMN_FK 					= "id_customer";
-		public final static String COLUMN_PHONE_NUMBER 			= "phoneNumber";
-		public final static String COLUMN_BIRTH_DATE 			= "birthDate";
-		public final static String COLUMN_BIRTH_CITY 			= "birthCity";
-		public final static String COLUMN_RESIDENTIAL_ADDRESS 	= "residentialAddress";
-		public final static String COLUMN_RESIDENCE_CITY 		= "residenceCity";
-		public final static String COLUMN_RESIDENCE_PROVINCE	= "residenceProvince";
-		public final static String COLUMN_RESIDENCE_POSTCODE 	= "residencePostcode";
-		public final static String COLUMN_TAX_CODE 				= "taxCode";
-		public final static String COLUMN_IDENTITY_CARD_NUMBER 	= "identityCardNumber";
+		public final static String COLUMN_FK 					= "customer_id";
+		public final static String COLUMN_PHONE_NUMBER 			= "phone_number";
+		public final static String COLUMN_BIRTH_DATE 			= "birth_date";
+		public final static String COLUMN_BIRTH_CITY 			= "birth_city";
+		public final static String COLUMN_RESIDENTIAL_ADDRESS 	= "residential_address";
+		public final static String COLUMN_RESIDENCE_CITY 		= "residence_city";
+		public final static String COLUMN_RESIDENCE_PROVINCE	= "residence_province";
+		public final static String COLUMN_RESIDENCE_POSTCODE 	= "residence_postcode";
+		public final static String COLUMN_TAX_CODE 				= "tax_code";
+		public final static String COLUMN_IDENTITY_CARD_NUMBER 	= "identity_card_number";
 
 		public final static boolean EMAIL_IS_REQUIRED_ON_DB 				= true;
 		public final static boolean SURNAME_IS_REQUIRED_ON_DB 				= true;
@@ -136,15 +138,16 @@ public class DbConstants {
 	public static class RoleTable {
 		public final static Long ID_ADMIN 		= 1L;
 		public final static Long ID_USER		= 2L;
-		public final static String TABLE_NAME 	= "name";
-		public final static String COLUMN_FK 	= "id_role";
+		public final static String TABLE_NAME 	= "role";
+		public final static String ROLE_NAME	= "role_name";
+		public final static String COLUMN_FK 	= "role_id";
 	}
 
 	public static class FlightTable {
 		public final static String TABLE_NAME 		= "flight";
-		public final static String COLUMN_FK 		= "id_flight";
-		public final static String COLUMN_DEPARTURE = "departureDate";
-		public final static String COLUMN_ARRIVAL 	= "arrivalDate";
+		public final static String COLUMN_FK 		= "flight_id";
+		public final static String COLUMN_DEPARTURE = "departure_date";
+		public final static String COLUMN_ARRIVAL 	= "arrival_date";
 		public final static String COLUMN_PRICE 	= "price";
 
 		public final static boolean FLIGHT_ROUTE_IS_REQUIRED_ON_DB 		= true;

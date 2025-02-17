@@ -20,11 +20,11 @@ public class Customer implements Serializable {
 	@Column(name = DbConstants.COLUMN_PK)
 	private Long id;
 
-	@Column(name = DbConstants.NAME)
-	private String name;
+	@Column(name = DbConstants.CustomerTable.CUSTOMER_NAME)
+	private String customerName;
 
-	@Column(name = DbConstants.CustomerTable.SURNAME)
-	private String surname;
+	@Column(name = DbConstants.CustomerTable.CUSTOMER_SURNAME)
+	private String customerSurname;
 
 	@Column(name = DbConstants.CustomerTable.EMAIL)
 	private String email;
@@ -81,20 +81,20 @@ public class Customer implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String name) {
+		this.customerName = name;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getCustomerSurname() {
+		return customerSurname;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setCustomerSurname(String surname) {
+		this.customerSurname = surname;
 	}
 
 	public String getEmail() {
@@ -203,7 +203,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password="
+		return "Customer [id=" + id + ", name=" + customerName + ", surname=" + customerSurname + ", email=" + email + ", password="
 				+ password + ", phoneNumber=" + phoneNumber + ", birthDate=" + birthDate
 				+ ", birthCity=" + birthCity + ", residentialAddress=" + residentialAddress + ", residenceCity="
 				+ residenceCity + ", residenceProvince=" + residenceProvince + ", residencePostcode="

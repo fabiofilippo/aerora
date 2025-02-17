@@ -3,6 +3,7 @@ package it.exolab.aero.repository;
 import it.exolab.aero.airport_01Model.models.entities.Airport;
 import it.exolab.aero.airport_01Model.models.entities.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,9 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
+    @Query("SELECT r FROM Reservation r ")
     List<Reservation> findAll();
+
 
     Optional<Reservation> findById(Long id);
 

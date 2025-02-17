@@ -3,7 +3,6 @@ package it.exolab.aero.service.utils;
 import it.exolab.aero.airport_01Model.dto.*;
 import it.exolab.aero.airport_01Model.models.entities.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class ModelToDtoConverter {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setId(customerEntity.getId());
 		customerDto.setIdRole(customerEntity.getRole().getId());
-		customerDto.setName(customerEntity.getName());
+		customerDto.setName(customerEntity.getCustomerName());
 
 //		if (null != customerEntity.getReservationList()) {
 //			List<ReservationDto> reservationDtoList = new ArrayList<>();
@@ -31,8 +30,8 @@ public class ModelToDtoConverter {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setId(customerEntity.getId());
 		customerDto.setIdRole(customerEntity.getRole().getId());
-		customerDto.setName(customerEntity.getName());
-		customerDto.setSurname(customerEntity.getSurname());
+		customerDto.setName(customerEntity.getCustomerName());
+		customerDto.setSurname(customerEntity.getCustomerSurname());
 		customerDto.setBirthCity(customerEntity.getBirthCity());
 		customerDto.setBirthDate(customerEntity.getBirthDate());
 		customerDto.setIdentityCardNumber(customerEntity.getIdentityCardNumber());
@@ -48,8 +47,8 @@ public class ModelToDtoConverter {
 	public CustomerDto customerDtoFactoryForReminderFlight(Customer customerEntity) {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setEmail(customerEntity.getEmail());
-		customerDto.setName(customerEntity.getName());
-		customerDto.setSurname(customerEntity.getSurname());
+		customerDto.setName(customerEntity.getCustomerName());
+		customerDto.setSurname(customerEntity.getCustomerSurname());
 		customerDto.setTaxCode(customerEntity.getTaxCode());
 		customerDto.setIdentityCardNumber(customerEntity.getIdentityCardNumber());
 
@@ -144,7 +143,7 @@ public class ModelToDtoConverter {
 	public AirportDto airportDtoFactoryBasic(Airport airportEntity) {
 		AirportDto airportDto = new AirportDto();
 		airportDto.setId(airportEntity.getId());
-		airportDto.setAirportName(airportEntity.getName());
+		airportDto.setAirportName(airportEntity.getAirportName());
 		airportDto.setAirportCity(airportEntity.getCity());
 
 		return airportDto;

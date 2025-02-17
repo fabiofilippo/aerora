@@ -19,7 +19,7 @@ public class Role implements Serializable {
 	@Column(name = DbConstants.COLUMN_PK)
 	private Long id;
 
-	@Column(name = DbConstants.NAME)
+	@Column(name = DbConstants.RoleTable.ROLE_NAME)
 	private String name;
 
 	@OneToMany(mappedBy = DbConstants.RoleTable.TABLE_NAME, fetch = FetchType.LAZY)

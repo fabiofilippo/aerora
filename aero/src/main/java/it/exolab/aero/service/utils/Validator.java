@@ -162,13 +162,13 @@ public class Validator {
 	private void validateSurname(String surname, List<String> errors, String methodName, boolean isRequiredOnDB) {
 		if (!CustomStringUtils.isStringNullOrEmpty(surname)) {
 			if (surname.length() > DbConstants.CustomerTable.NAME_LENGTH) {
-				errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.SURNAME + " " + GeneralConstants.TOO_LONG_STRING));
+				errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.CUSTOMER_SURNAME + " " + GeneralConstants.TOO_LONG_STRING));
 			}
 			if (!surname.matches(RegexConstants.NAMES_PATTERN)) {
-				errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.SURNAME + " " + GeneralConstants.INVALID_FORMAT));
+				errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.CUSTOMER_SURNAME + " " + GeneralConstants.INVALID_FORMAT));
 			}
 		} else if (isRequiredOnDB){
-			errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.SURNAME + " " + GeneralConstants.NULL));
+			errors.add(stringErrorBuilder(methodName, DbConstants.CustomerTable.CUSTOMER_SURNAME + " " + GeneralConstants.NULL));
 		}
 	}
 
