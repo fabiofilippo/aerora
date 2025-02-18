@@ -1,8 +1,11 @@
 package it.exolab.aero.service.controllers;
 
+import it.exolab.aero.airport_01Model.dto.FlightDto;
 import it.exolab.aero.airport_01Model.models.entities.Flight;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
+import it.exolab.aero.airport_01Model.models.entities.Reservation;
 import it.exolab.aero.repository.FlightRepository;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +22,29 @@ public class FlightService{
 		return flightRepository.findAll();
 	}
 
-	public Flight findById(Long id) {
+	public Flight findById(Long id) throws AeroportoException {
 		Optional<Flight> flight = flightRepository.findById(id);
 
-		return flight.get();
+		return flight.orElseThrow(AeroportoException::new);
+	}
+
+	public Integer countAvailableSeats(FlightDto flightDto) throws AeroportoException {
+		Long idFlight = flightDto.getId();
+		Flight foundFlight;
+		try {
+			foundFlight = findById(idFlight);
+			Integer totalSeats = foundFlight.getAirplane().getSeats();
+			List<Reservation> currentReservations = foundFlight.getReservationList();
+			int reservedSeats = 0;
+
+			for (Reservation reservation: currentReservations) {
+				reservedSeats += reservation.getTicketList().size();
+			}
+
+			return totalSeats - reservedSeats;
+		} catch (AeroportoException e) {
+			throw new AeroportoException("Volo non disponibile");
+		}
 	}
 
 //	@SuppressWarnings("serial")

@@ -1,5 +1,6 @@
 package it.exolab.aero.rest.endpoint;
 
+import it.exolab.aero.airport_01Model.dto.FlightDto;
 import it.exolab.aero.airport_01Model.dto.FlightSearchDto;
 import it.exolab.aero.airport_01Model.dto.ResponseDto;
 import it.exolab.aero.airport_01Model.models.entities.Flight;
@@ -57,6 +58,26 @@ public class FlightRest {
         try {
             List<Flight> availableFlightList = commonControllerService.findFlight(flightSearchDto);
             responseDto.setData(availableFlightList);
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (AeroportoException e) {
+            e.printStackTrace();
+            responseDto.setErrorMessage(e.getMessage());
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseDto.setErrorMessage(e.getMessage());
+            return new ResponseEntity<>(responseDto, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/seats")
+    public ResponseEntity<ResponseDto> countAvailableSeats(@RequestBody FlightDto flightDto) throws AeroportoException {
+        ResponseDto responseDto = new ResponseDto();
+        try {
+            Integer availableSeats = flightService.countAvailableSeats(flightDto);
+            FlightDto responseFlightDto = new FlightDto();
+            responseFlightDto.setAvailableSeats(availableSeats);
+            responseDto.setData(responseFlightDto);
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         } catch (AeroportoException e) {
             e.printStackTrace();
