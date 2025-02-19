@@ -57,7 +57,7 @@ public class DbConstants {
 		public final static int PAYMENT_METHOD_LENGTH 		= 20;
 
 		public final static String TABLE_NAME 				= "reservation";
-		public final static String COLUMN_FK 				= "id_reservation";
+		public final static String COLUMN_FK 				= "reservation_id";
 		public final static String COLUMN_DATE 				= "date";
 		public final static String COLUMN_PAYMENT_METHOD 	= "payment_method";
 
