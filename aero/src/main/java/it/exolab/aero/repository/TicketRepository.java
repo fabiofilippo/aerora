@@ -17,6 +17,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     Optional<Ticket> findById(Long id);
 
+    Ticket save(Ticket ticket);
+
 //	public Ticket insertTicket(EntityManager entityManager, Ticket ticket) throws UnforeseenException {
 //		System.out.println("TicketCRUD insert, ticket: " + ticket);
 //		try {

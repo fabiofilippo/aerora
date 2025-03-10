@@ -1,11 +1,14 @@
 package it.exolab.aero.service.controllers;
 
-import it.exolab.aero.airport_01Model.models.entities.Airport;
-import it.exolab.aero.airport_01Model.models.entities.Reservation;
+import it.exolab.aero.airport_01Model.models.entities.*;
+import it.exolab.aero.repository.CustomerRepository;
+import it.exolab.aero.repository.FlightRepository;
 import it.exolab.aero.repository.ReservationRepository;
+import it.exolab.aero.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,15 @@ public class ReservationService {
 	@Autowired
 	ReservationRepository reservationRepository;
 
+	@Autowired
+	FlightRepository flightRepository;
+
+	@Autowired
+	TicketRepository ticketRepository;
+
+	@Autowired
+	CustomerRepository customerRepository;
+
 	public List<Reservation> findAll() {
 		return reservationRepository.findAll();
 	}
@@ -23,6 +35,29 @@ public class ReservationService {
 		Optional<Reservation> reservation = reservationRepository.findById(id);
 
 		return reservation.get();
+	}
+
+	public Reservation insert(Reservation reservation) {
+		Flight trovato = flightRepository.findById(reservation.getFlight().getId()).get();
+		Customer customerTrovato = customerRepository.findById(reservation.getCustomer().getId()).get();
+
+		reservation.setDate(LocalDate.now());
+		reservation.setValidity(true);
+		reservation.setFlight(trovato);
+		reservation.setCustomer(customerTrovato);
+		List<Ticket> ticketList = reservation.getTicketList();
+		reservation.setTicketList(null);
+		Reservation inserita = reservationRepository.save(reservation);
+		inserita.setTicketList(ticketList);
+
+		reservation.getTicketList().forEach(ticket -> {
+			ticket.setValidity(true);
+			ticket.setPrice(trovato.getPrice());
+			ticket.setReservation(inserita);
+			ticket.
+			ticketRepository.save(ticket);
+		});
+		return inserita;
 	}
 //
 //	@Override

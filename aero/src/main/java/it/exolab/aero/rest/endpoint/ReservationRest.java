@@ -46,6 +46,17 @@ public class ReservationRest {
         }
     }
 
+    @PostMapping("/insert")
+    public ResponseEntity<Reservation> insert(@RequestBody Reservation reservationInput) {
+        try {
+            Reservation reservation = reservationService.insert(reservationInput);
+            return new ResponseEntity<>(reservation, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new Reservation(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 //	@SuppressWarnings("finally")
 //	@Override
 //	public Response findAllReservation() {

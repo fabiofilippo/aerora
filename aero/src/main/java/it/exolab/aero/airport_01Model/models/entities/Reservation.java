@@ -42,7 +42,6 @@ public class Reservation implements Serializable {
 
 	@OneToMany(mappedBy = DbConstants.ReservationTable.TABLE_NAME)
 	@JsonbTransient
-	@JsonIgnore
 	private List<Ticket> ticketList;
 
 

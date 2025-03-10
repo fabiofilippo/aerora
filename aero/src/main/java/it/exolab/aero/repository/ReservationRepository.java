@@ -19,6 +19,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     Optional<Reservation> findById(Long id);
 
+    Reservation save(Reservation reservation);
+
 //	public Reservation insertReservation(EntityManager entityManager, Reservation reservation) throws UnforeseenException {
 //		System.out.println("ReservationCRUD update, reservation: " + reservation);
 //		try {

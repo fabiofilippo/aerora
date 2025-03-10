@@ -6,6 +6,7 @@ import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 @Entity
@@ -27,6 +28,9 @@ public class Ticket implements Serializable {
 
 	@Column(name = DbConstants.TicketTable.COLUMN_HOLDER_SURNAME)
 	private String holderSurname;
+
+	@Column(name = DbConstants.TicketTable.COLUMN_CODE)
+	private String code;
 
 	@ManyToOne()
 	@JoinColumn(name = DbConstants.ReservationTable.COLUMN_FK,  insertable = true, updatable = true)
@@ -89,17 +93,38 @@ public class Ticket implements Serializable {
 		this.validity = validity;
 	}
 
-	@Override
-	public String toString() {
-		return "Ticket [id=" + id + ", price=" + price + ", holderName=" + holderName + ", holderSurname="
-				+ holderSurname + ", reservation=" + reservation + ", validity=" + validity + "]";
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		return
-			null != obj
-			&& obj instanceof Ticket
-			&& ((Ticket) obj).getId() == this.id;
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) return false;
+		Ticket ticket = (Ticket) o;
+		return validity == ticket.validity && Objects.equals(id, ticket.id) && Objects.equals(price, ticket.price) && Objects.equals(holderName,
+				ticket.holderName) && Objects.equals(holderSurname, ticket.holderSurname) && Objects.equals(code, ticket.code) && Objects.equals(reservation,
+				ticket.reservation);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, price, holderName, holderSurname, code, reservation, validity);
+	}
+
+	@Override
+	public String toString() {
+		return "Ticket{" +
+				"id=" + id +
+				", price=" + price +
+				", holderName='" + holderName + '\'' +
+				", holderSurname='" + holderSurname + '\'' +
+				", code='" + code + '\'' +
+				", reservation=" + reservation +
+				", validity=" + validity +
+				'}';
 	}
 }

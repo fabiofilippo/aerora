@@ -73,6 +73,7 @@ public class DbConstants {
 		public final static String TABLE_NAME 				= "ticket";
 		public final static String COLUMN_HOLDER_NAME 		= "holder_name";
 		public final static String COLUMN_HOLDER_SURNAME 	= "holder_surname";
+		public final static String COLUMN_CODE 				= "code";
 
 		public final static boolean HOLDER_NAME_IS_REQUIRED_ON_DB 		= true;
 		public final static boolean HOLDER_SURNAME_IS_REQUIRED_ON_DB 	= true;
