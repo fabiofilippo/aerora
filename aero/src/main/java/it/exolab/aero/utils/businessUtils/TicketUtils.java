@@ -15,7 +15,7 @@ public class TicketUtils {
         StringBuilder sb = new StringBuilder();
         for (int counter = 0; counter < CODE_LENGTH; counter++) {
             int estratto = random.nextInt(caratteriPossibili.length - 1);
-            sb.append(estratto);
+            sb.append(caratteriPossibili[estratto]);
         }
         return sb.toString();
     }
