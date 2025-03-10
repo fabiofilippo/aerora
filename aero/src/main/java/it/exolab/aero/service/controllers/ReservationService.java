@@ -5,6 +5,7 @@ import it.exolab.aero.repository.CustomerRepository;
 import it.exolab.aero.repository.FlightRepository;
 import it.exolab.aero.repository.ReservationRepository;
 import it.exolab.aero.repository.TicketRepository;
+import it.exolab.aero.utils.businessUtils.TicketUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class ReservationService {
 			ticket.setValidity(true);
 			ticket.setPrice(trovato.getPrice());
 			ticket.setReservation(inserita);
-			ticket.
+			ticket.setCode(TicketUtils.generateCode());
 			ticketRepository.save(ticket);
 		});
 		return inserita;
