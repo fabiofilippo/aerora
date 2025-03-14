@@ -11,6 +11,7 @@ public class ResponseDto implements Serializable {
 	private Object data;
 	private String message;
 	private String errorMessage;
+	private int status;
 	private boolean state;
 
 }
