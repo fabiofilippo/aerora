@@ -12,6 +12,7 @@ public class RestConstants {
 		public final static String TICKET 							= "/ticket";
 		public final static String FLIGHT_ROUTE 					= "/flightRoute";
 		public final static String FILE								= "/file";
+		public final static String DATA_MANAGER						= "/dataManager";
 		public final static String INSERT 							= "/insert";
 		public final static String UPDATE 							= "/update";
 		public final static String DELETE 							= "/delete";
@@ -25,6 +26,8 @@ public class RestConstants {
 		public final static String FIND_FLIGHT_ROUTE_BY_AIRPORTS 	= "/findRoutesByAirports";
 		public final static String FIND_CUSTOMER_BY_ID				= "/findCustomerById";
 		public final static String FIND_ALL_F_AIRPORTS				= "/findAllFAirports";
+		public final static String SETUP_FLIGHTROUTES				= "/setupFlightRoutes";
+		public final static String ENTRY_DATA						= "/entryData";
 	}
 
 }

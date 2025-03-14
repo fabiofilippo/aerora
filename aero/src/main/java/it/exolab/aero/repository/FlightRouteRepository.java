@@ -26,6 +26,22 @@ public interface FlightRouteRepository extends JpaRepository<FlightRoute, Long> 
     Optional<FlightRoute> findByAirports(@Param("departureCity") String departureCity,
                                          @Param("arrivalCity") String arrivalCity);
 
+    @Query("SELECT COUNT(fr) > 0 FROM FlightRoute fr " +
+            "JOIN fr.departureAirport da " +
+            "JOIN fr.arrivalAirport aa " +
+            "WHERE da.airportName = :departureName " +
+            "AND aa.airportName = :arrivalName")
+    boolean existsByAirportsName(@Param("departureName") String departureName,
+                                 @Param("arrivalName") String arrivalName);
+
+    @Query("SELECT fr FROM FlightRoute fr " +
+            "JOIN fr.departureAirport da " +
+            "JOIN fr.arrivalAirport aa " +
+            "WHERE da.airportName = :departureName " +
+            "AND aa.airportName = :arrivalName")
+    Optional<FlightRoute> findByAirportsName(@Param("departureName") String departureName,
+                                             @Param("arrivalName") String arrivalName);
+
     @Query("SELECT fr FROM FlightRoute fr " +
             "JOIN fr.departureAirport a " +
             "WHERE a.city = :departureCity ")
