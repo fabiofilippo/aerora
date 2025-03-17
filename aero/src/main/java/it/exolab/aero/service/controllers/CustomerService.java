@@ -3,10 +3,8 @@ package it.exolab.aero.service.controllers;
 
 import it.exolab.aero.airport_01Model.dto.CustomerDto;
 import it.exolab.aero.airport_01Model.models.entities.Customer;
-import it.exolab.aero.airport_01Model.models.entities.Flight;
 import it.exolab.aero.airport_01Model.models.entities.Role;
 import it.exolab.aero.repository.CustomerRepository;
-import it.exolab.aero.repository.FlightRepository;
 import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.ObjLongConsumer;
 
 @Service
 public class CustomerService {
@@ -59,8 +56,8 @@ public class CustomerService {
 		}
 
 		Customer customer = new Customer();
-		customer.setCustomerName(dto.getName());
-		customer.setCustomerSurname(dto.getSurname());
+		customer.setCustomerName(dto.getCustomerName());
+		customer.setCustomerSurname(dto.getCustomerSurname());
 		customer.setEmail(dto.getEmail());
 		customer.setPassword(dto.getPassword());
 

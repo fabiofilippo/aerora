@@ -13,7 +13,7 @@ public class ModelToDtoConverter {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setId(customerEntity.getId());
 		customerDto.setIdRole(customerEntity.getRole().getId());
-		customerDto.setName(customerEntity.getCustomerName());
+		customerDto.setCustomerName(customerEntity.getCustomerName());
 
 //		if (null != customerEntity.getReservationList()) {
 //			List<ReservationDto> reservationDtoList = new ArrayList<>();
@@ -30,8 +30,8 @@ public class ModelToDtoConverter {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setId(customerEntity.getId());
 		customerDto.setIdRole(customerEntity.getRole().getId());
-		customerDto.setName(customerEntity.getCustomerName());
-		customerDto.setSurname(customerEntity.getCustomerSurname());
+		customerDto.setCustomerName(customerEntity.getCustomerName());
+		customerDto.setCustomerSurname(customerEntity.getCustomerSurname());
 		customerDto.setBirthCity(customerEntity.getBirthCity());
 		customerDto.setBirthDate(customerEntity.getBirthDate());
 		customerDto.setIdentityCardNumber(customerEntity.getIdentityCardNumber());
@@ -47,8 +47,8 @@ public class ModelToDtoConverter {
 	public CustomerDto customerDtoFactoryForReminderFlight(Customer customerEntity) {
 		CustomerDto customerDto = new CustomerDto();
 		customerDto.setEmail(customerEntity.getEmail());
-		customerDto.setName(customerEntity.getCustomerName());
-		customerDto.setSurname(customerEntity.getCustomerSurname());
+		customerDto.setCustomerName(customerEntity.getCustomerName());
+		customerDto.setCustomerSurname(customerEntity.getCustomerSurname());
 		customerDto.setTaxCode(customerEntity.getTaxCode());
 		customerDto.setIdentityCardNumber(customerEntity.getIdentityCardNumber());
 

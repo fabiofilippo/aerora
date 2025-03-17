@@ -8,8 +8,8 @@ public class CustomerDto implements Serializable {
 
 	private static final long serialVersionUID = 7618096602167304404L;
 	private Long id;
-	private String name;
-	private String surname;
+	private String customerName;
+	private String customerSurname;
 	private String email;
 	private String password;
 	private String phoneNumber;
@@ -33,17 +33,17 @@ public class CustomerDto implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-	public String getSurname() {
-		return surname;
+	public String getCustomerSurname() {
+		return customerSurname;
 	}
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setCustomerSurname(String customerSurname) {
+		this.customerSurname = customerSurname;
 	}
 	public String getEmail() {
 		return email;
@@ -125,7 +125,7 @@ public class CustomerDto implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "CustomerDto [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password="
+		return "CustomerDto [id=" + id + ", name=" + customerName + ", surname=" + customerSurname + ", email=" + email + ", password="
 				+ password + ", phoneNumber=" + phoneNumber + ", birthDate=" + birthDate + ", birthCity=" + birthCity
 				+ ", residentialAddress=" + residentialAddress + ", residenceCity=" + residenceCity
 				+ ", residenceProvince=" + residenceProvince + ", residencePostcode=" + residencePostcode + ", taxCode="

@@ -338,8 +338,8 @@ public class Validator {
 				} else if (null == customerDto.getId() && GeneralConstants.UPDATE.equals(operation)) {
 					errors.add(stringErrorBuilder(methodName, DbConstants.COLUMN_PK + " " + GeneralConstants.NULL));
 				}
-				validateName(customerDto.getName(), errors, methodName, DbConstants.CustomerTable.NAME_IS_REQUIRED_ON_DB);
-				validateSurname(customerDto.getSurname(), errors, methodName, DbConstants.CustomerTable.SURNAME_IS_REQUIRED_ON_DB);
+				validateName(customerDto.getCustomerName(), errors, methodName, DbConstants.CustomerTable.NAME_IS_REQUIRED_ON_DB);
+				validateSurname(customerDto.getCustomerSurname(), errors, methodName, DbConstants.CustomerTable.SURNAME_IS_REQUIRED_ON_DB);
 				if(GeneralConstants.INSERT.equals(operation)) {
 					validateEmail(customerDto.getEmail(), errors, methodName, DbConstants.CustomerTable.EMAIL_IS_REQUIRED_ON_DB);
 				}

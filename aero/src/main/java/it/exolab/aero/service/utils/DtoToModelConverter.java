@@ -18,8 +18,8 @@ public class DtoToModelConverter {
 	public Customer customerFactoryForUpdate(CustomerDto customerDto) {
 		Customer customerEntity = new Customer();
 		customerEntity.setId(customerDto.getId());
-		customerEntity.setCustomerName(customerDto.getName());
-		customerEntity.setCustomerSurname(customerDto.getSurname());
+		customerEntity.setCustomerName(customerDto.getCustomerName());
+		customerEntity.setCustomerSurname(customerDto.getCustomerSurname());
 		customerEntity.setPhoneNumber(customerDto.getPhoneNumber());
 		customerEntity.setResidentialAddress(customerDto.getResidentialAddress());
 		customerEntity.setResidenceCity(customerDto.getResidenceCity());
