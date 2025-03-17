@@ -39,6 +39,7 @@ public class CustomerService {
 			customer.setId(entity.getId());
 			customer.setIdRole(entity.getRole().getId());
 			customer.setEmail(dto.getEmail());
+			customer.setCustomerName(entity.getCustomerName());
 
 			return customer;
 		} else throw new AeroportoException("Email o passoword non valide");
@@ -53,6 +54,9 @@ public class CustomerService {
 					"\n- Almeno un carattere maiuscolo" +
 					"\n- Almeno un carattere numerico" +
 					"\n- Lunghezza di almeno 6 caratteri, senza spazi");
+		}
+		if (customerRepository.findByEmail(dto.getEmail()).isPresent()) {
+			throw new AeroportoException("Sei già registrato, se hai dimenticato la password ");
 		}
 
 		Customer customer = new Customer();

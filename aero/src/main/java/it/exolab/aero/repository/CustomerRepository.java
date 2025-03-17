@@ -18,6 +18,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Optional<Customer> findByEmailAndPassword(String email, String password);
 
+    Optional<Customer> findByEmail(String email);
+
 //	@SuppressWarnings("unchecked")
 //	public List<Customer> findAllCustomer(EntityManager entityManager) throws DBQueryException, UnforeseenException {
 //		List<Customer> customerList = new ArrayList<>();
