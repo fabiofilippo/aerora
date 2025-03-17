@@ -98,6 +98,7 @@ public class DataManagerService {
 			List<Airport> airportList = airportRep.findAll();
 			List<Airplane> airplaneList = airplaneRep.findAll();
 			for (int indexDay = 0; indexDay < days.size(); indexDay++) {
+				System.out.println("giorno n. " + indexDay);
 				for (int indexPartenza = 0; indexPartenza < airportList.size(); indexPartenza++) {
 					for (int indexArrivo = indexPartenza + 1; indexArrivo < airportList.size(); indexArrivo++) {
 						if (indexPartenza != indexArrivo) {

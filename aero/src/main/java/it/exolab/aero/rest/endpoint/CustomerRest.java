@@ -1,8 +1,11 @@
 package it.exolab.aero.rest.endpoint;
 
+import it.exolab.aero.airport_01Model.dto.CustomerDto;
+import it.exolab.aero.airport_01Model.dto.ResponseDto;
 import it.exolab.aero.airport_01Model.models.entities.Customer;
 import it.exolab.aero.service.controllers.CustomerService;
 import it.exolab.aero.utils.customUtils.constants.strings.RestConstants;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +41,22 @@ public class CustomerRest {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new Customer(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/findByEmailAndPassword")
+    public ResponseEntity<ResponseDto> findByEmailAndPassword(@RequestBody CustomerDto customerInput) {
+        ResponseDto response = new ResponseDto();
+        try {
+            CustomerDto customer = customerService.findByEmailAndPassword(customerInput);
+            response.setData(customer);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AeroportoException ex) {
+            response.setMessage(ex.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

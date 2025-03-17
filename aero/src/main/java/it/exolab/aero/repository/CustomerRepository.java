@@ -16,6 +16,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Optional<Customer> findById(Long id);
 
+    Optional<Customer> findByEmailAndPassword(String email, String password);
+
 //	@SuppressWarnings("unchecked")
 //	public List<Customer> findAllCustomer(EntityManager entityManager) throws DBQueryException, UnforeseenException {
 //		List<Customer> customerList = new ArrayList<>();

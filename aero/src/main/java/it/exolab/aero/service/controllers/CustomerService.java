@@ -1,10 +1,12 @@
 package it.exolab.aero.service.controllers;
 
 
+import it.exolab.aero.airport_01Model.dto.CustomerDto;
 import it.exolab.aero.airport_01Model.models.entities.Customer;
 import it.exolab.aero.airport_01Model.models.entities.Flight;
 import it.exolab.aero.repository.CustomerRepository;
 import it.exolab.aero.repository.FlightRepository;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,20 @@ public class CustomerService {
 		Optional<Customer> customer = customerRepository.findById(id);
 
 		return customer.get();
+	}
+
+	public CustomerDto findByEmailAndPassword(CustomerDto dto) throws Exception {
+		Optional<Customer> customerOptional = customerRepository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
+		if (customerOptional.isPresent()) {
+			Customer entity = customerOptional.get();
+			CustomerDto customer = new CustomerDto();
+			customer.setId(entity.getId());
+			customer.setIdRole(entity.getRole().getId());
+			customer.setEmail(dto.getEmail());
+
+			return customer;
+		} else throw new AeroportoException("Email o passoword non valide");
+
 	}
 
 //	@Override
