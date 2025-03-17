@@ -64,9 +64,9 @@ public class CustomerService {
 		Role role = new Role();
 		role.setId(2L);
 		customer.setRole(role);
-		customer.setPassword("");
 		customerRepository.save(customer);
 
+		customer.setPassword("");
 		dto.setId(customer.getId());
 		return dto;
 	}
