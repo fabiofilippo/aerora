@@ -60,6 +60,22 @@ public class CustomerRest {
         }
     }
 
+    @PostMapping("/insert")
+    public ResponseEntity<ResponseDto> register(@RequestBody CustomerDto customerInput) {
+        ResponseDto response = new ResponseDto();
+        try {
+            CustomerDto customer = customerService.register(customerInput);
+            response.setData(customer);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AeroportoException ex) {
+            response.setMessage(ex.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 //	@Override
 //	public Response findAllCustomer() {
 //		return null;

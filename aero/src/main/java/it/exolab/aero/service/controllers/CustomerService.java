@@ -4,6 +4,7 @@ package it.exolab.aero.service.controllers;
 import it.exolab.aero.airport_01Model.dto.CustomerDto;
 import it.exolab.aero.airport_01Model.models.entities.Customer;
 import it.exolab.aero.airport_01Model.models.entities.Flight;
+import it.exolab.aero.airport_01Model.models.entities.Role;
 import it.exolab.aero.repository.CustomerRepository;
 import it.exolab.aero.repository.FlightRepository;
 import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.ObjLongConsumer;
 
 @Service
 public class CustomerService {
@@ -43,6 +46,32 @@ public class CustomerService {
 			return customer;
 		} else throw new AeroportoException("Email o passoword non valide");
 
+	}
+
+	public CustomerDto register(CustomerDto dto) throws Exception {
+		String password = dto.getPassword();
+		if (Objects.nonNull(password) && !password.matches("^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")) {
+			throw new AeroportoException("La password deve contenere: " +
+					"\n- Almeno un carattere minuscolo" +
+					"\n- Almeno un carattere maiuscolo" +
+					"\n- Almeno un carattere numerico" +
+					"\n- Lunghezza di almeno 6 caratteri, senza spazi");
+		}
+
+		Customer customer = new Customer();
+		customer.setCustomerName(dto.getName());
+		customer.setCustomerSurname(dto.getSurname());
+		customer.setEmail(dto.getEmail());
+		customer.setPassword(dto.getPassword());
+
+		Role role = new Role();
+		role.setId(2L);
+		customer.setRole(role);
+		customer.setPassword("");
+		customerRepository.save(customer);
+
+		dto.setId(customer.getId());
+		return dto;
 	}
 
 //	@Override
