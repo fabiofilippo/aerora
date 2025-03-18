@@ -52,7 +52,7 @@ public class CustomerRest {
             response.setData(customer);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (AeroportoException ex) {
-            response.setMessage(ex.getMessage());
+            response.setErrorMessage(ex.getMessage());
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
