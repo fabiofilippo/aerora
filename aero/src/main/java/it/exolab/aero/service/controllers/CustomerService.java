@@ -42,21 +42,21 @@ public class CustomerService {
 			customer.setCustomerName(entity.getCustomerName());
 
 			return customer;
-		} else throw new AeroportoException("Email o passoword non valide");
+		} else throw new AeroportoException("Email o password non valide");
 
 	}
 
 	public CustomerDto register(CustomerDto dto) throws Exception {
 		String password = dto.getPassword();
-		if (Objects.nonNull(password) && !password.matches("^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")) {
-			throw new AeroportoException("La password deve contenere: " +
-					"\n- Almeno un carattere minuscolo" +
-					"\n- Almeno un carattere maiuscolo" +
-					"\n- Almeno un carattere numerico" +
-					"\n- Lunghezza di almeno 6 caratteri, senza spazi");
-		}
 		if (customerRepository.findByEmail(dto.getEmail()).isPresent()) {
 			throw new AeroportoException("Sei già registrato, se hai dimenticato la password ");
+		}
+		if (Objects.nonNull(password) && !password.matches("^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$")) {
+			throw new AeroportoException("La password deve contenere: " +
+					"- Almeno un carattere minuscolo" +
+					"- Almeno un carattere maiuscolo" +
+					"- Almeno un carattere numerico" +
+					"- Lunghezza di almeno 6 caratteri, senza spazi");
 		}
 
 		Customer customer = new Customer();
