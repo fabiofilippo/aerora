@@ -46,6 +46,16 @@ public class CustomerService {
 
 	}
 
+	public CustomerDto findByEmail(CustomerDto customerDto) throws Exception {
+		Optional<Customer> customerOptional = customerRepository.findByEmail(customerDto.getEmail());
+		if (customerOptional.isPresent()) {
+			customerDto.setId(customerOptional.get().getId());
+
+			return customerDto;
+		} else throw new AeroportoException("Email non trovata");
+
+	}
+
 	public CustomerDto register(CustomerDto dto) throws Exception {
 		String password = dto.getPassword();
 		if (customerRepository.findByEmail(dto.getEmail()).isPresent()) {
@@ -73,6 +83,15 @@ public class CustomerService {
 		customer.setPassword("");
 		dto.setId(customer.getId());
 		return dto;
+	}
+
+	public CustomerDto cambioPass(CustomerDto customerDto) {
+		Customer customer = customerRepository.findById(customerDto.getId()).get();
+
+		customer.setPassword(customerDto.getPassword());
+		customerRepository.save(customer);
+
+		return customerDto;
 	}
 
 //	@Override

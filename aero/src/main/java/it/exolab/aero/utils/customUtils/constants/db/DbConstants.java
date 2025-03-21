@@ -15,6 +15,13 @@ public class DbConstants {
 	public final static int RESERVATION_TABLE_CODE 	= 6;
 	public final static int TICKET_TABLE_CODE 		= 7;
 
+	public static class OtpTable {
+		public final static String TABLE_NAME 			= "otp";
+		public final static String COLUMN_FK 			= "otp_id";
+		public final static String COLUMN_EXP_DATE 		= "expiration_date";
+		public final static String COLUMN_CODE 			= "code";
+	}
+
 	public static class AirplaneTable {
 		public final static Integer MODEL_LENGTH 	= 20;
 		public final static Integer MIN_SEATS 		= 50;

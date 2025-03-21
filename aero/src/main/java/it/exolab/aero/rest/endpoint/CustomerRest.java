@@ -60,11 +60,44 @@ public class CustomerRest {
         }
     }
 
+    @PostMapping("/findByEmail")
+    public ResponseEntity<ResponseDto> findByEmail(@RequestBody CustomerDto customerDto) {
+        ResponseDto response = new ResponseDto();
+        try {
+            CustomerDto customer = customerService.findByEmail(customerDto);
+            response.setData(customer);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AeroportoException ex) {
+            response.setErrorMessage(ex.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/insert")
     public ResponseEntity<ResponseDto> register(@RequestBody CustomerDto customerInput) {
         ResponseDto response = new ResponseDto();
         try {
             CustomerDto customer = customerService.register(customerInput);
+            response.setData(customer);
+            response.setSuccessMessage("Registrazione avvenuta con successo");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AeroportoException ex) {
+            response.setErrorMessage(ex.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/cambioPass")
+    public ResponseEntity<ResponseDto> cambioPass(@RequestBody CustomerDto customerDto) {
+        ResponseDto response = new ResponseDto();
+        try {
+            CustomerDto customer = customerService.cambioPass(customerDto);
             response.setData(customer);
             response.setSuccessMessage("Registrazione avvenuta con successo");
             return new ResponseEntity<>(response, HttpStatus.OK);

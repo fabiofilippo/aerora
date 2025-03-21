@@ -13,6 +13,8 @@ public class RestConstants {
 		public final static String FLIGHT_ROUTE 					= "/flightRoute";
 		public final static String FILE								= "/file";
 		public final static String DATA_MANAGER						= "/dataManager";
+		public final static String OTP								= "/otp";
+
 		public final static String INSERT 							= "/insert";
 		public final static String UPDATE 							= "/update";
 		public final static String DELETE 							= "/delete";

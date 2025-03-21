@@ -69,6 +69,11 @@ public class Customer implements Serializable {
 	@OrderBy("date DESC, id DESC")
 	private List<Reservation> reservationList;
 
+	@OneToMany(mappedBy = DbConstants.CustomerTable.TABLE_NAME)
+	@JsonbTransient
+	@JsonIgnore
+	private List<Otp> otpList;
+
 	public Customer() {
 		super();
 	}
@@ -208,7 +213,8 @@ public class Customer implements Serializable {
 				+ ", birthCity=" + birthCity + ", residentialAddress=" + residentialAddress + ", residenceCity="
 				+ residenceCity + ", residenceProvince=" + residenceProvince + ", residencePostcode="
 				+ residencePostcode + ", taxCode=" + taxCode + ", identityCardNumber=" + identityCardNumber + ", role="
-				+ role.getName() + ", reservationListSize=" + (reservationList == null ? 0 : reservationList.size()) + "]";
+				+ role.getName() + ", reservationListSize=" + (reservationList == null ? 0 : reservationList.size())
+				+ ", otpListSize=" + (otpList == null ? 0 : otpList.size()) +"]";
 	}
 
 	@Override
@@ -218,4 +224,12 @@ public class Customer implements Serializable {
 			&& obj instanceof Customer
 			&& ((Customer) obj).getId() == this.id;
 	}
+
+    public List<Otp> getOtpList() {
+        return otpList;
+    }
+
+    public void setOtpList(List<Otp> otpList) {
+        this.otpList = otpList;
+    }
 }
