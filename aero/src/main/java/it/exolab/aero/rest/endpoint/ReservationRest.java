@@ -1,6 +1,8 @@
 package it.exolab.aero.rest.endpoint;
 
 
+import it.exolab.aero.airport_01Model.dto.ResponseDto;
+import it.exolab.aero.airport_01Model.dto.TicketDto;
 import it.exolab.aero.airport_01Model.models.entities.Customer;
 import it.exolab.aero.airport_01Model.models.entities.FlightRoute;
 import it.exolab.aero.airport_01Model.models.entities.Reservation;
@@ -8,6 +10,7 @@ import it.exolab.aero.service.controllers.CustomerService;
 import it.exolab.aero.service.controllers.FlightRouteService;
 import it.exolab.aero.service.controllers.ReservationService;
 import it.exolab.aero.utils.customUtils.constants.strings.RestConstants;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(RestConstants.Airport_01Path.RESERVATION)
@@ -54,6 +58,28 @@ public class ReservationRest {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new Reservation(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/findPrenotazioneByTicket")
+    public ResponseEntity<ResponseDto> findByTicket(@RequestBody TicketDto ticketDto) {
+        ResponseDto response = new ResponseDto();
+        try {
+            Reservation reservation = null;
+            if (Objects.isNull(ticketDto.getHolderSurname())) {
+                reservation = reservationService.findByTicket(ticketDto.getCode());
+            } else {
+                reservation = reservationService.findByTicket(ticketDto.getCode(), ticketDto.getHolderSurname());
+            }
+            response.setData(reservation);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AeroportoException e) {
+            e.printStackTrace();
+            response.setErrorMessage(e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

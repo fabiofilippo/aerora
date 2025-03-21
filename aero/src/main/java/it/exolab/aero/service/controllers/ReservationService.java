@@ -1,11 +1,14 @@
 package it.exolab.aero.service.controllers;
 
+import it.exolab.aero.airport_01Model.dto.ReservationDto;
+import it.exolab.aero.airport_01Model.dto.TicketDto;
 import it.exolab.aero.airport_01Model.models.entities.*;
 import it.exolab.aero.repository.CustomerRepository;
 import it.exolab.aero.repository.FlightRepository;
 import it.exolab.aero.repository.ReservationRepository;
 import it.exolab.aero.repository.TicketRepository;
 import it.exolab.aero.utils.businessUtils.TicketUtils;
+import it.exolab.aero.utils.customUtils.exceptions.AeroportoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +62,32 @@ public class ReservationService {
 			ticketRepository.save(ticket);
 		});
 		return inserita;
+	}
+
+	public Reservation findByTicket(String ticketCode, String surname) {
+		Optional<Ticket> optionalTicket = ticketRepository.findByCodeAndHolderSurname(ticketCode, surname);
+		if (optionalTicket.isEmpty()) {
+			throw new AeroportoException("Non sono stati trovati biglietti con il codice ed il cognome inseriti");
+		}
+		return getReservationByTicket(optionalTicket.get());
+	}
+
+	public Reservation findByTicket(String ticketCode) {
+		List<Ticket> tickets = ticketRepository.findByCode(ticketCode);
+		if (tickets.isEmpty()) {
+			throw new AeroportoException("Non sono stati trovati biglietti con il codice inserito");
+		}
+		if (tickets.size() > 1) {
+			throw new AeroportoException("Sono stati trovati più biglietti con questo codice. Inserire anche il cognome del passeggero");
+		}
+		return getReservationByTicket(tickets.get(0));
+	}
+
+	private Reservation getReservationByTicket(Ticket ticket) {
+		Reservation reservation = ticket.getReservation();
+		reservation.setCustomer(null);
+
+		return reservation;
 	}
 //
 //	@Override

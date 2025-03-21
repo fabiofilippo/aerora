@@ -4,6 +4,7 @@ import it.exolab.aero.airport_01Model.models.entities.Airplane;
 import it.exolab.aero.airport_01Model.models.entities.Airport;
 import it.exolab.aero.airport_01Model.models.entities.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,17 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     Optional<Ticket> findById(Long id);
 
     Ticket save(Ticket ticket);
+
+    @Query("SELECT T FROM Ticket T " +
+            "WHERE T.reservation.flight.departureDate > NOW()" +
+            "AND T.code = :code")
+    List<Ticket> findByCode(String code);
+
+    @Query("SELECT T FROM Ticket T " +
+            "WHERE T.reservation.flight.departureDate > NOW()" +
+            "AND T.code = :code " +
+            "AND T.holderSurname = :holderSurname")
+    Optional<Ticket> findByCodeAndHolderSurname(String code, String holderSurname);
 
 //	public Ticket insertTicket(EntityManager entityManager, Ticket ticket) throws UnforeseenException {
 //		System.out.println("TicketCRUD insert, ticket: " + ticket);

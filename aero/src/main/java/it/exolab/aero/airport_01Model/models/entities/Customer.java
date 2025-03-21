@@ -208,7 +208,7 @@ public class Customer implements Serializable {
 				+ ", birthCity=" + birthCity + ", residentialAddress=" + residentialAddress + ", residenceCity="
 				+ residenceCity + ", residenceProvince=" + residenceProvince + ", residencePostcode="
 				+ residencePostcode + ", taxCode=" + taxCode + ", identityCardNumber=" + identityCardNumber + ", role="
-				+ role + ", reservationListSize=" + (reservationList == null ? 0 : reservationList.size()) + "]";
+				+ role.getName() + ", reservationListSize=" + (reservationList == null ? 0 : reservationList.size()) + "]";
 	}
 
 	@Override

@@ -44,4 +44,16 @@ public class Flight implements Serializable {
 	@JsonIgnore
 	private List<Reservation> reservationList;
 
+	@Override
+	public String toString() {
+		return "Flight{" +
+				"id=" + id +
+				", departureDate=" + departureDate +
+				", arrivalDate=" + arrivalDate +
+				", price=" + price +
+				", airplane=" + airplane +
+				", flightRoute=" + flightRoute +
+				", reservationList=" + (null == reservationList ? 0 : reservationList.size()) +
+				'}';
+	}
 }

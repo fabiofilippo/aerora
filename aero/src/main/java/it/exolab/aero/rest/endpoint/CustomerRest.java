@@ -53,7 +53,7 @@ public class CustomerRest {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (AeroportoException ex) {
             response.setErrorMessage(ex.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,10 +66,11 @@ public class CustomerRest {
         try {
             CustomerDto customer = customerService.register(customerInput);
             response.setData(customer);
+            response.setSuccessMessage("Registrazione avvenuta con successo");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (AeroportoException ex) {
             response.setErrorMessage(ex.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
