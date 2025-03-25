@@ -40,6 +40,7 @@ public class OtpService {
 		otpRepository.save(otp);
 		OtpDto dto = new OtpDto();
 		dto.setCode(code);
+		dto.setCustomerId(customerDto.getId());
 
 		return dto;
 	}
